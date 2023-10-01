@@ -1,17 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-#brur-face {
-  background-image: url("/imgs/brur_face.gif");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100%;
-  background-color: #baf7d0;
-  border-width: 1px;
-  border-color: gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

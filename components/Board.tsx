@@ -3,6 +3,7 @@ import { Word } from "@/lib/types";
 import { useLongPress } from "use-long-press";
 import ReactCardFlip from "react-card-flip";
 import data from "../lib/data.json";
+import Image from "next/image";
 
 type BoardProps = {
   matrix: Word[][];
@@ -77,9 +78,9 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       {...bind()}
                       onClick={() => handleClick(word)}
                       className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background} ${fontWeight}`}
-                      id={"brur-face"}
+                      
                     >
-                      <p>{""}</p>
+                      <Image alt="Solstråla" src='/imgs/brur_face.gif' width={100} height={100} />
                     </div>
                   )}
                 </td>
