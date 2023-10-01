@@ -47,7 +47,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
             {row.map((word, j) => {
               const wordIsSelected = selectedWords.includes(word);
               const background = wordIsSelected ? "bg-green-200 " : "";
-              const fontWeight = gameOver && wordIsSelected ? "font-black" : "";
+              const fontWeight = gameOver && wordIsSelected ? "font-bold" : "";
               const isFreeWord = word === "FREE";
               const author = data.find((d) => d.word === word)?.submittedBy;
 
