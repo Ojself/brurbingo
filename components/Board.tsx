@@ -59,16 +59,16 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       <div
                         {...bind()}
                         onClick={() => handleClick(word)}
-                        className={`p-1 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
-                      >
-                        <p className={`break-words text-xs md:text-base ${fontWeight}`}>{word}</p>
+                        className={`flex items-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
+                        >
+                        <p className={`mx-2 break-all text-xs md:text-base ${fontWeight}`}>{word}</p>
                       </div>
 
                       <div
                         {...bind()}
                         onClick={() => setCardFlipped("")}
-                        className={`p-1 flex flex-col items-center justify-center  w-16 h-16 md:w-24 md:h-24 border border-red-400 `}
-                      >
+                        className={`flex flex-col items-center justify-center  w-16 h-16 md:w-24 md:h-24 border border-blue-500 `}
+                        >
                         <p className="text-xs">Submitted by</p>
                         <p>{author}</p>
                       </div>
