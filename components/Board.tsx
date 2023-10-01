@@ -15,24 +15,22 @@ type BoardProps = {
 const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   const [cardFlipped, setCardFlipped] = useState<Word>("");
   const [errors, setErrors] = useState<string[]>([]);
-  const bind = useLongPress((event: any) => {
-    handleError("bind");
-    const word = event.target.textContent;
-    if (word === "FREE") {
-      return setCardFlipped("");
+  const bind = useLongPress(
+    (event: any) => {
+      handleError("bind");
+      const word = event.target.textContent;
+      if (word === "FREE") {
+        return setCardFlipped("");
+      }
+      if (cardFlipped === word) {
+        return setCardFlipped("");
+      }
+      setCardFlipped(word);
+    },
+    {
+      onFinish: (event) => event.preventDefault(),
     }
-    if (cardFlipped === word) {
-      return setCardFlipped("");
-    }
-    setCardFlipped(word);
-  },{
-    onStart: event => handleError('Press started'),
-    onFinish: event => handleError('Long press finished'),
-    onCancel: event => handleError('Press cancelled'),
-    onMove: event => handleError('Detected mouse or touch movement'),
-  });
-
-  
+  );
 
   const handleError = (str: string) => {
     setErrors([...errors, str]);
