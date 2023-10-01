@@ -144,7 +144,7 @@ const GameWrapper = () => {
         <h1
           className={`text-4xl mb-4 font-medium uppercase text-center ${animationStyle}`}
         >
-          Brur Bingo
+          BrurBingo
         </h1>
 
         {loading ? (
