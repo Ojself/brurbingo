@@ -59,17 +59,17 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       <div
                         {...bind()}
                         onClick={() => handleClick(word)}
-                        className={`flex items-center justify-center text-xs md:text-base w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background} ${fontWeight}`}
+                        className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
                       >
-                        <p className=''>{word}</p>
+                        <p className={`break-words text-xs md:text-base ${fontWeight}`}>{word}</p>
                       </div>
 
                       <div
                         {...bind()}
                         onClick={() => setCardFlipped("")}
-                        className={`flex flex-col items-center justify-center text-xs w-16 h-16 md:w-24 md:h-24 border border-red-400 `}
+                        className={`flex flex-col items-center justify-center  w-16 h-16 md:w-24 md:h-24 border border-red-400 `}
                       >
-                        <p>Submitted by</p>
+                        <p className="text-xs">Submitted by</p>
                         <p>{author}</p>
                       </div>
                     </ReactCardFlip>
@@ -77,7 +77,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                     <div
                       {...bind()}
                       onClick={() => handleClick(word)}
-                      className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background} ${fontWeight}`}
+                      className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
                       
                     >
                       <Image alt="Solstråla" src='/imgs/brur_face.gif' width={100} height={100} />
