@@ -25,7 +25,14 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
       return setCardFlipped("");
     }
     setCardFlipped(word);
+  },{
+    onStart: event => handleError('Press started'),
+    onFinish: event => handleError('Long press finished'),
+    onCancel: event => handleError('Press cancelled'),
+    onMove: event => handleError('Detected mouse or touch movement'),
   });
+
+  
 
   const handleError = (str: string) => {
     setErrors([...errors, str]);
