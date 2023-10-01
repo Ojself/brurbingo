@@ -14,7 +14,9 @@ type BoardProps = {
 
 const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   const [cardFlipped, setCardFlipped] = useState<Word>("");
+  const [errors, setErrors] = useState<string[]>([]);
   const bind = useLongPress((event: any) => {
+    handleError("bind");
     const word = event.target.textContent;
     if (word === "FREE") {
       return setCardFlipped("");
@@ -25,7 +27,15 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
     setCardFlipped(word);
   });
 
+  const handleError = (str: string) => {
+    setErrors([...errors, str]);
+    setTimeout(() => {
+      setErrors([]);
+    }, 5000);
+  };
+
   const handleClick = (word: Word) => {
+    handleError("click");
     if (word === "FREE") {
       return;
     }
@@ -35,6 +45,9 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
 
   return (
     <table className='table-fixed'>
+      {errors.map((e) => {
+        return <p key={e} className='text-xl'>{e}</p>;
+      })}
       <tbody>
         {matrix.map((row, i) => (
           <tr key={i}>
@@ -60,16 +73,20 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                         {...bind()}
                         onClick={() => handleClick(word)}
                         className={`flex items-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
+                      >
+                        <p
+                          className={`mx-2 break-all text-xs md:text-base ${fontWeight}`}
                         >
-                        <p className={`mx-2 break-all text-xs md:text-base ${fontWeight}`}>{word}</p>
+                          {word}
+                        </p>
                       </div>
 
                       <div
                         {...bind()}
                         onClick={() => setCardFlipped("")}
                         className={`flex flex-col items-center justify-center  w-16 h-16 md:w-24 md:h-24 border border-blue-500 `}
-                        >
-                        <p className="text-xs">Submitted by</p>
+                      >
+                        <p className='text-xs'>Submitted by</p>
                         <p>{author}</p>
                       </div>
                     </ReactCardFlip>
@@ -78,9 +95,13 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       {...bind()}
                       onClick={() => handleClick(word)}
                       className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
-                      
                     >
-                      <Image alt="Solstråla" src='/imgs/brur_face.gif' width={100} height={100} />
+                      <Image
+                        alt='Solstråla'
+                        src='/imgs/brur_face.gif'
+                        width={100}
+                        height={100}
+                      />
                     </div>
                   )}
                 </td>
