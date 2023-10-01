@@ -34,7 +34,8 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
     }, 5000);
   };
 
-  const handleClick = (word: Word) => {
+  const handleClick = (word: Word, e: any) => {
+    e.preventDefault();
     handleError("click");
     if (word === "FREE") {
       return;
@@ -46,7 +47,11 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   return (
     <table className='table-fixed'>
       {errors.map((e) => {
-        return <p key={e} className='text-xl'>{e}</p>;
+        return (
+          <p key={e} className='text-xl'>
+            {e}
+          </p>
+        );
       })}
       <tbody>
         {matrix.map((row, i) => (
@@ -71,7 +76,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                     >
                       <div
                         {...bind()}
-                        onClick={() => handleClick(word)}
+                        onClick={(e) => handleClick(word, e)}
                         className={`flex items-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
                       >
                         <p
@@ -93,7 +98,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                   ) : (
                     <div
                       {...bind()}
-                      onClick={() => handleClick(word)}
+                      onClick={(e) => handleClick(word, e)}
                       className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
                     >
                       <Image
