@@ -79,7 +79,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background} ${fontWeight}`}
                       id={"brur-face"}
                     >
-                      <p className=''>{""}</p>
+                      <p>{""}</p>
                     </div>
                   )}
                 </td>
