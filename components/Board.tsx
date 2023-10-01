@@ -65,10 +65,10 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       <div
                         {...bind()}
                         onClick={(e) => handleClick(word, e)}
-                        className={`flex items-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
+                        className={`flex items-center justify-center px-1 w-20 h-20 md:w-28 md:h-28 border border-gray-400  ${background}`}
                       >
                         <p
-                          className={`mx-2 break-all text-xs md:text-base ${fontWeight}`}
+                          className={`break-normal text-xs md:text-base ${fontWeight}`}
                         >
                           {word}
                         </p>
@@ -77,7 +77,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       <div
                         {...bind()}
                         onClick={() => setCardFlipped("")}
-                        className={`flex flex-col items-center justify-center  w-16 h-16 md:w-24 md:h-24 border border-blue-500 `}
+                        className={`flex flex-col items-center justify-center  w-20 h-20 md:w-28 md:h-28 border border-blue-500 `}
                       >
                         <p className='text-xs'>Submitted by</p>
                         <p>{author}</p>
@@ -87,7 +87,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                     <div
                       {...bind()}
                       onClick={(e) => handleClick(word, e)}
-                      className={`flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gray-400  ${background}`}
+                      className={`flex items-center justify-center w-20 h-20 md:w-28 md:h-28 border border-gray-400  ${background}`}
                     >
                       <Image
                         alt='Solstråla'
