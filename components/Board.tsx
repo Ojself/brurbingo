@@ -14,10 +14,8 @@ type BoardProps = {
 
 const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   const [cardFlipped, setCardFlipped] = useState<Word>("");
-  const [errors, setErrors] = useState<string[]>([]);
   const bind = useLongPress(
     (event: any) => {
-      handleError("bind");
       const word = event.target.textContent;
       if (word === "FREE") {
         return setCardFlipped("");
@@ -32,16 +30,8 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
     }
   );
 
-  const handleError = (str: string) => {
-    setErrors([...errors, str]);
-    setTimeout(() => {
-      setErrors([]);
-    }, 5000);
-  };
-
   const handleClick = (word: Word, e: any) => {
     e.preventDefault();
-    handleError("click");
     if (word === "FREE") {
       return;
     }
@@ -51,13 +41,6 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
 
   return (
     <table className='table-fixed'>
-      {errors.map((e) => {
-        return (
-          <p key={e} className='text-xl'>
-            {e}
-          </p>
-        );
-      })}
       <tbody>
         {matrix.map((row, i) => (
           <tr key={i}>
