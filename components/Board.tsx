@@ -40,13 +40,16 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   };
 
   const breakWord = (word: Word) => {
+    if (word.includes(" ")) {
+      return word
+    }
     const middleIndex = Math.floor(word.length / 2);
     const firstHalf = word.slice(0, middleIndex);
     const secondHalf = word.slice(middleIndex);
     if (word.length > 8) {
       return (
         <>
-          {firstHalf } 
+          {firstHalf + "-"} 
           <br />
           {secondHalf}
         </>
@@ -63,7 +66,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
             {row.map((word, j) => {
               const wordIsSelected = selectedWords.includes(word);
               const background = wordIsSelected ? "bg-green-200 " : "";
-              const fontWeight = gameOver && wordIsSelected ? "font-bold" : "";
+              const fontWeight = gameOver && wordIsSelected ? "font-bold" : "font-light";
               const isFreeWord = word === "FREE";
               const author = data.find((d) => d.word === word)?.submittedBy;
 
@@ -84,7 +87,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
 
                         className={`flex items-center justify-center px-1 w-[70px] h-[70px] md:w-28 md:h-28 border border-gray-400  ${background}`}
                       >
-                        <p className={`text-xs md:text-base ${fontWeight}`}>
+                        <p className={`text-xs md:text-sm ${fontWeight}`}>
                           {breakWord(word)}
                         </p>
                       </div>
