@@ -67,9 +67,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                         onClick={(e) => handleClick(word, e)}
                         className={`flex items-center justify-center px-1 w-[70px] h-[70px] md:w-28 md:h-28 border border-gray-400  ${background}`}
                       >
-                        <p
-                          className={`break-words text-xs md:text-base ${fontWeight}`}
-                        >
+                        <p className={`text-xs md:text-base ${fontWeight}`}>
                           {word}
                         </p>
                       </div>
