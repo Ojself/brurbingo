@@ -39,6 +39,22 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
     onClick(word);
   };
 
+  const breakWord = (word: Word) => {
+    const middleIndex = Math.floor(word.length / 2);
+    const firstHalf = word.slice(0, middleIndex);
+    const secondHalf = word.slice(middleIndex);
+    if (word.length > 8) {
+      return (
+        <>
+          {firstHalf } 
+          <br />
+          {secondHalf}
+        </>
+      );
+    }
+    return word
+  }
+
   return (
     <table className='table-fixed'>
       <tbody>
@@ -65,10 +81,11 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       <div
                         {...bind()}
                         onClick={(e) => handleClick(word, e)}
+
                         className={`flex items-center justify-center px-1 w-[70px] h-[70px] md:w-28 md:h-28 border border-gray-400  ${background}`}
                       >
                         <p className={`text-xs md:text-base ${fontWeight}`}>
-                          {word}
+                          {breakWord(word)}
                         </p>
                       </div>
 
