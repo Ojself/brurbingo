@@ -14,6 +14,7 @@ type BoardProps = {
 
 const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   const [cardFlipped, setCardFlipped] = useState<Word>("");
+  const [blink, setBlink] = useState(false);
   const bind = useLongPress(
     (event: any) => {
       const word = event.target.textContent;
@@ -26,9 +27,17 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
       setCardFlipped(word);
     },
     {
-      filterEvents: (event) => true, // All events can potentially trigger long press
+      filterEvents: (event) => {
+        return true;
+      },
     }
   );
+  const handleBlink = () => {
+    setBlink(true);
+    setTimeout(() => {
+      setBlink(false);
+    }, 1000);
+  };
 
   const handleClick = (word: Word, e: any) => {
     e.preventDefault();
@@ -58,9 +67,10 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
     return word;
   };
 
+  const blinkStyle = blink ? "animate-pulse" : "";
   return (
-    <table className='table-fixed'>
-      <tbody>
+    <table className='table-fixed '>
+      <tbody className={blinkStyle}>
         {matrix.map((row, i) => (
           <tr key={i}>
             {row.map((word, j) => {
