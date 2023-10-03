@@ -98,7 +98,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                         className={`flex flex-col items-center justify-center  w-[70px] h-[70px] md:w-28 md:h-28 border border-blue-500 `}
                       >
                         <p className='text-xs'>Submitted by</p>
-                        <p>{author}</p>
+                        <p>{breakWord(author || " ")}</p>
                       </div>
                     </ReactCardFlip>
                   ) : (
