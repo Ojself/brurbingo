@@ -1,27 +1,36 @@
 "use client";
+
 import { useState } from "react";
 import React from "react";
 
 const Footer = () => {
-  const [horsePosition, setHorsePosition] = useState(5);
+  const [horsePositionX, setHorsePositionX] = useState(5);
   const handleClick = () => {
-    const newIntervalId = setInterval(() => {
+    setInterval(() => {
       let random = Math.random() * 5 + 3;
-      setHorsePosition((prevPosition) => prevPosition - random);
+      setHorsePositionX((prevPosition) => prevPosition - random);
     }, 80);
   };
-  const rotation = horsePosition % 15;
+  const rotation = horsePositionX % 15;
+  const horsePositionY = horsePositionX < -8 && horsePositionX > -160 ? -17 : 0;
 
   return (
     <footer className='relative h-24 border-t-2 w-screen bg-yellow-100 flex items-center justify-center'>
       <p>
         Powered by{" "}
+        <a
+          className='hover:underline'
+          rel='noopener noreferrer'
+          href='https://github.com/Ojself/'
+        >
+          Tormod
+        </a>{" "}
         <span
           onClick={handleClick}
+          className='cursor-pointer ml-1'
           style={{
-            cursor: "pointer",
             position: "absolute",
-            transform: `translateX(${horsePosition}px) rotate(${rotation}deg)`,
+            transform: `translateX(${horsePositionX}px) translateY(${horsePositionY}px) rotate(${rotation}deg)`,
           }}
         >
           🐎
