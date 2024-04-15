@@ -17,7 +17,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
   const [blink, setBlink] = useState(false);
   const bind = useLongPress(
     (event: any) => {
-      const word = event.target.textContent.replace("-", "")
+      const word = event.target.textContent.replace("-", "");
       if (word === "FREE") {
         return setCardFlipped("");
       }
