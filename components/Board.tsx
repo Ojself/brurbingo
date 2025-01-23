@@ -32,12 +32,6 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
       },
     }
   );
-  const handleBlink = () => {
-    setBlink(true);
-    setTimeout(() => {
-      setBlink(false);
-    }, 1000);
-  };
 
   const handleClick = (word: Word, e: any) => {
     e.preventDefault();
@@ -69,7 +63,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
 
   const blinkStyle = blink ? "animate-pulse" : "";
   return (
-    <table className='table-fixed '>
+    <table className="table-fixed ">
       <tbody className={blinkStyle}>
         {matrix.map((row, i) => (
           <tr key={i}>
@@ -83,14 +77,14 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
 
               return (
                 <td
-                  className='cursor-pointer select-none text-center'
+                  className="cursor-pointer select-none text-center"
                   key={word}
                 >
                   {!isFreeWord ? (
                     <ReactCardFlip
                       key={word}
                       isFlipped={cardFlipped === word}
-                      flipDirection='horizontal'
+                      flipDirection="horizontal"
                     >
                       <div
                         {...bind()}
@@ -107,7 +101,7 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                         onClick={() => setCardFlipped("")}
                         className={`flex flex-col items-center justify-center  w-[70px] h-[70px] md:w-28 md:h-28 border border-blue-500 `}
                       >
-                        <p className='text-xs'>Submitted by</p>
+                        <p className="text-xs">Submitted by</p>
                         <p>{breakWord(author || " ")}</p>
                       </div>
                     </ReactCardFlip>
@@ -118,8 +112,8 @@ const Board = ({ matrix, onClick, selectedWords, gameOver }: BoardProps) => {
                       className={`flex items-center justify-center w-[70px] h-[70px] md:w-28 md:h-28 border border-gray-400  ${background}`}
                     >
                       <Image
-                        alt='Solstråla'
-                        src='/imgs/brur_face.gif'
+                        alt="Solstråla"
+                        src="/imgs/brur_face.gif"
                         width={100}
                         height={100}
                       />

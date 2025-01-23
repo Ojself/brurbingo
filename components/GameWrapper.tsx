@@ -1,12 +1,12 @@
 "use client";
-import { Word } from "@/lib/types";
 import React, { useEffect, useState } from "react";
-import ReactCardFlip from "react-card-flip";
+import { Word } from "@/lib/types";
 
 import Board from "./Board";
 import data from "../lib/data.json";
 import ConfettiFall from "./ConfettiFall";
 import Footer from "./Footer";
+import ReactCardFlip from "react-card-flip";
 
 const GameWrapper = () => {
   const [wordsMatrix, setWordsMatrix] = useState<Word[][]>([]);
@@ -14,7 +14,7 @@ const GameWrapper = () => {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [animateHeader, setAnimateHeader] = useState<boolean>(false);
-  const [flippedBoard, setFlippedBoard] = useState<boolean>(false);
+  const [showWords, setShowWords] = useState<boolean>(false);
 
   useEffect(() => {
     const previousMatrix = localStorage.getItem(`brurbingo-matrix`);
@@ -60,6 +60,9 @@ const GameWrapper = () => {
     setWordsMatrix(newMatrix);
     setGameOver(false);
     setLoading(false);
+  };
+  const toggleShowWords = () => {
+    setShowWords(!showWords);
   };
 
   useEffect(() => {
@@ -120,6 +123,7 @@ const GameWrapper = () => {
 
     return isBingo;
   };
+
   const checkVictoryDiagonal = () => {
     // should check both diagonals
     const leftRightDiagonal = wordsMatrix.map((row, i) => row[i]);
@@ -138,9 +142,9 @@ const GameWrapper = () => {
   const animationStyle = animateHeader ? "animate-ping" : "";
 
   return (
-    <div className='flex flex-col justify-between items-center h-full'>
+    <div className="flex flex-col justify-between items-center h-full">
       {gameOver && <ConfettiFall />}
-      <div className='flex flex-col items-center justify-center h-full'>
+      <div className="flex flex-col items-center justify-center h-full">
         <h1
           className={`text-4xl mb-4 font-medium uppercase text-center ${animationStyle}`}
         >
@@ -148,28 +152,67 @@ const GameWrapper = () => {
         </h1>
 
         {loading ? (
-          <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900'></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
         ) : (
-          <Board
-            matrix={wordsMatrix}
-            selectedWords={selectedWords}
-            onClick={onClick}
-            gameOver={gameOver}
-          />
+          <ReactCardFlip
+            key={"x"}
+            isFlipped={showWords}
+            flipDirection="horizontal"
+          >
+            <div className={` `}>
+              <Board
+                matrix={wordsMatrix}
+                selectedWords={selectedWords}
+                onClick={onClick}
+                gameOver={gameOver}
+              />
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-xs italic">
+                  Tip: Long press to see who submitted
+                </p>
+                <div className="flex">
+                  <button
+                    className="border py-2 px-4 mt-2 bg-blue-500 text-white rounded-md"
+                    onClick={resetBoard}
+                  >
+                    Reset
+                  </button>
+                  <button
+                    className="border py-2 px-4 mt-2 bg-green-500 text-white rounded-md"
+                    onClick={toggleShowWords}
+                  >
+                    See all words
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div onClick={() => setShowWords(false)} className={` `}>
+              <pre className="text-xs">
+                {data.map((d, i) => (
+                  <p key={i}>
+                    <span>{d.word}</span>
+                    <span> - </span>
+                    <span className="italic">{d.submittedBy}</span>
+                  </p>
+                ))}
+              </pre>
+            </div>
+          </ReactCardFlip>
         )}
-        <div className='flex flex-col items-center justify-center'>
-          <p className='text-xs italic'>Tip: Long press to see who submitted</p>
-          
-            <button
-              className='border py-2 px-4 mt-2 bg-blue-500 text-white rounded-md'
-              onClick={resetBoard}
-            >
-              Reset
-            </button>
-          
-        </div>
       </div>
       <div>
+        {!!showWords && (
+          <p className="text-center">
+            Mangler vi et ord?{" "}
+            <a
+              className="underline hover:font-semibold"
+              href="mailto:tormod.flesjo@gmail.com"
+            >
+              Ta kontakt
+            </a>
+          </p>
+        )}
         <Footer />
       </div>
     </div>
